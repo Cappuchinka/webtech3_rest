@@ -7,8 +7,6 @@ import org.locationtech.jts.geom.Polygon;
 import org.n52.jackson.datatype.jts.GeometryDeserializer;
 import org.n52.jackson.datatype.jts.GeometrySerializer;
 
-import java.time.LocalDate;
-
 @Data
 public class GeoDto {
     private String namePlace;

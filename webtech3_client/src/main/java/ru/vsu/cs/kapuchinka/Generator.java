@@ -5,8 +5,10 @@ import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.LinearRing;
 import org.locationtech.jts.geom.Polygon;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Generator {
     private static final Random random = new Random();
@@ -27,8 +29,11 @@ public class Generator {
         return geometryFactory.createPolygon(linearRing, null);
     }
 
-    public static LocalDate generateDate() {
-        return LocalDate.now();
+    public static LocalDateTime generateDate() {
+        long minDay = LocalDateTime.of(1970, 1, 1, 0, 0).toEpochSecond(ZoneOffset.UTC);
+        long maxDay = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
+        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
+        return LocalDateTime.ofEpochSecond(randomDay, 0, ZoneOffset.UTC);
     }
 
     public static String generatePlace() {
